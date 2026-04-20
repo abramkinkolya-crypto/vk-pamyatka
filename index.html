@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Памятка ВК · ЛП, требующие решения врачебной комиссии</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --text: #1a1d22;
+    --muted: #6b7280;
+    --border: #e4e7eb;
+    --accent: #0d6efd;
+    --accent-soft: #e7f1ff;
+    --warn: #b45309;
+    --warn-soft: #fef3c7;
+    --danger: #b91c1c;
+    --danger-soft: #fee2e2;
+    --ok: #15803d;
+    --ok-soft: #dcfce7;
+    --info: #1d4ed8;
+    --info-soft: #dbeafe;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.45;
+    font-size: 14px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
+  header.page {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  header.page h1 {
+    margin: 0 0 6px 0;
+    font-size: 20px;
+    line-height: 1.3;
+  }
+  header.page .sub {
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+  .toolbar {
+    position: sticky; top: 0;
+    background: var(--bg);
+    padding: 10px 0;
+    z-index: 5;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .search-row {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .search-row input[type="text"] {
+    flex: 1 1 280px;
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    outline: none;
+    transition: border-color .12s;
+  }
+  .search-row input[type="text"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(13,110,253,.15);
+  }
+  .counter {
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .filters {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 10px;
+  }
+  .chip {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 5px 11px;
+    font-size: 12.5px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .1s, border-color .1s, color .1s;
+  }
+  .chip:hover { border-color: #c7cdd6; }
+  .chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+    font-size: 11.5px; color: var(--muted);
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .badge.vk-clin { background: var(--danger-soft); color: var(--danger); }
+  .badge.vk      { background: var(--warn-soft);   color: var(--warn); }
+  .badge.no-vk   { background: var(--ok-soft);     color: var(--ok); }
+  .badge.jnvlp   { background: var(--info-soft);   color: var(--info); }
+  .badge.app     { background: #eef2f7; color: #374151; }
+
+  table.rules {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  table.rules thead th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--muted);
+    background: #f1f3f6;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.rules tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.rules tbody tr:last-child td { border-bottom: none; }
+  table.rules tbody tr:hover { background: #fafbfc; }
+  .mnn { font-weight: 600; }
+  .form { color: #374151; font-size: 13px; white-space: pre-wrap; }
+  .badges { display: flex; flex-wrap: wrap; gap: 4px; }
+  mark {
+    background: #fff3a3;
+    color: inherit;
+    padding: 0 1px;
+    border-radius: 2px;
+  }
+  .empty {
+    padding: 30px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  footer.page {
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 11.5px;
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 12px 10px 40px; }
+    header.page { padding: 14px 14px; }
+    header.page h1 { font-size: 17px; }
+    table.rules thead { display: none; }
+    table.rules, table.rules tbody, table.rules tr, table.rules td { display: block; width: 100%; }
+    table.rules tr {
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+    }
+    table.rules tbody tr:last-child { border-bottom: none; }
+    table.rules tbody td { border: none; padding: 2px 0; }
+    table.rules thead th { position: static; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page">
+    <h1>Памятка: ЛП, назначаемые по решению врачебной комиссии</h1>
+    <div class="sub">
+      Приложения 1.2, 1.3, 1.4 к приказу ГБУЗ «ГКБ им. В.П. Демихова ДЗМ» № 56 от 12.01.2026.
+      Поиск по МНН или по форме выпуска.
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="search-row">
+      <input id="lpSearch" type="text" placeholder="Начните вводить МНН или торговое/словарное название..." autocomplete="off" spellcheck="false">
+      <span class="counter" id="counter"></span>
+    </div>
+    <div class="filters" id="filters">
+      <button class="chip active" data-filter="all">Все</button>
+      <button class="chip" data-filter="vk-clin">ВК + клинфармаколог</button>
+      <button class="chip" data-filter="vk-only">Только ВК</button>
+      <button class="chip" data-filter="no-vk">Без ВК</button>
+      <button class="chip" data-filter="jnvlp">ЖНВЛП</button>
+      <button class="chip" data-filter="not-jnvlp">Не ЖНВЛП</button>
+    </div>
+    <div class="legend">
+      <span class="badge vk-clin">ВК + клинфармаколог</span>
+      <span class="badge vk">только ВК</span>
+      <span class="badge no-vk">без ВК</span>
+      <span class="badge jnvlp">ЖНВЛП</span>
+      <span class="badge app">Прил. 1.X</span>
+    </div>
+  </div>
+
+  <table class="rules" id="vkTable">
+    <thead>
+      <tr>
+        <th style="width: 38%;">МНН</th>
+        <th style="width: 42%;">Форма выпуска</th>
+        <th style="width: 20%;">Статус</th>
+      </tr>
+    </thead>
+    <tbody id="vkBody"></tbody>
+  </table>
+  <div class="empty" id="emptyMsg" style="display:none;">Ничего не найдено. Попробуйте изменить запрос или сбросить фильтр.</div>
+
+  <footer class="page">
+    Источник данных — приказ № 56 от 12.01.2026. Документ носит справочный характер, при расхождениях приоритет имеет оригинальный приказ.
+  </footer>
+</div>
+
+<script>
+  const DATA = [{"mnn": "Азтреонам", "form": "порошок для приготовления раствора для внутривенного и внутримышечного введения, флакон, 1 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · ВК + клинфармаколог"}, "need_vk": true, "need_clinpharm": true, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Анидулафунгин", "form": "лиофилизат для приготовления концентрата для приготовления раствора для инфузий, флакон, 100 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · ВК + клинфармаколог"}, "need_vk": true, "need_clinpharm": true, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Колистиметат натрия", "form": "лиофилизат, 1000000 ЕД\nлиофилизат, 1000000 ЕД 80 мг\nпорошок для приготовления раствора для внутривенного введения, 4500000 ЕД\nпорошок для приготовления раствора для инъекций, инфузий и ингаляций, флакон, 1000000 ЕД\nраствор, 1000000 ЕД", "category": {"appendix": "1.2", "label": "Прил. 1.2 · ВК + клинфармаколог"}, "need_vk": true, "need_clinpharm": true, "jnvlp": false, "appendix": "1.2"}, {"mnn": "L-орнитин-L-аспартат", "form": "концентрат для приготовления раствора для инфузий 500мг/мл 10мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Азаметония бромид", "form": "раствор для внутривенного и внутримышечного введения 50 мг/мл, ампула, 1 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Алимемазин", "form": "таблетки, покрытые пленочной оболочкой, таблетки, 5 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Аминофенилмасляная кислота", "form": "таблетки, 250 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Антитромбин III", "form": "лиофилизат для приготовления раствора для инфузий, флакон, 1000 МЕлиоф. д/р-ра д/инф. 500 МЕ фл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Ацетилсалициловая кислота+Клопидогрел", "form": "таблетки, покрытые пленочной оболочкой, таблетки, 100 мг+75 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Ацетилсалициловая кислота+Магния гидроксид", "form": "таблетки, покрытые пленочной оболочкой, 75 мг+15,2 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бактериофаг бактерий клебсиелл, однокомпонентный", "form": "раствор для приема внутрь, местного и наружного применения, флакон, 20 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бактериофаг клебсиелл пневмонии очищенный", "form": "раствор для приема внутрь, местного и наружного применения 20 мл, 100 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бактериофаг колипротейный", "form": "раствор для приема внутрь, местного и наружного применения 20 мл, 100 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бактериофаг псевдомонас аэругиноза (синегнойный)", "form": "раствор для приема внутрь, местного и наружного применения 20 мл, 100 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бактериофаг стафилококковый", "form": "раствор для приема внутрь, местного и наружного применения 20 мл, 100 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бактериофаг стрептококковый", "form": "раствор для приема внутрь, местного и наружного применения 20 мл, 100 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бензилдиметил-миристоиламино-пропиламмоний", "form": "капли глазные, ушные и назальные 0.01 %, флакон, 10 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бенфотиамин+Пиридоксин", "form": "таблетки, покрытые пленочной оболочкой, 100 мг+100 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бетаметазон+салициловая кислота", "form": "мазь для наружного применения 0,5мг+30мг/1г туба 30 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бромгексин", "form": "таблетки, 8 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Бромфенак", "form": "глазные капли 0,09% 5 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Будесонид+Гликопиррония бромид+Формотерол", "form": "аэр. д/ингал. доз. 160 мкг+7,2 мкг+5 мкг/доза 10,7 г инг 120 доз", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Венлафаксин", "form": "таблетки, 37,5 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Гепарин натрия+Бензокаин+Бензилникотинат", "form": "мазь для наружного применения 100 МЕ/г+40 мг/г+0,8 мг/г, туба, 25 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Гесперидин+Диосмин", "form": "таблетки, 50 мг 450 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Гипромеллоза+Декстран", "form": "капли глазные 3мг/мл+1мг/мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Гликозаминогликаны сульфатированные", "form": "гель глазной 10 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Глимепирид", "form": "таблетки, 4 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Грамицидин С+Оксибупрокаин+Цетилпиридиния хлорид", "form": "спрей для местного применения дозированный 112 доз", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Далтепарин натрия", "form": "раствор для внутривенного и подкожного введения 5000 анти-XA МЕ/0,2 мл, шприц, 0,2 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Дексмедетомидин", "form": "концентрат для приготовления раствора для инфузий 100 мкг/мл, ампула / флакон, 2 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Декстроза", "form": "пор. д/р-ра д/приема внутрь 75 г 84.4 г бут", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Депротеинизированный гемодериват крови телят", "form": "раствор для инъекций 40 мг/мл, ампула, 10 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Диклофенак+Орфенадрин", "form": "раствор для инфузий 75 мг+30 мг, флакон, 250 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Дилтиазем", "form": "таблетки, 90 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Диоксометилтетрагидропиримидин+Лидокаин+Офлоксацин", "form": "мазь для наружного применения, туба, 30 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Диоксометилтетрагидропиримидин+Хлорамфеникол", "form": "мазь для наружного применения, туба, 40 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Доксиламин", "form": "таблетки, покрытые пленочной оболочкой, таблетки, 15 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Дроперидол", "form": "раствор, 2,5 мг/мл 2 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Дулоксетин", "form": "капсулы, кишечнорастворимые 30 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Железа III гидроксид полимальтозат", "form": "раствор для внутримышечного введения 50 мг/мл, ампула, 2 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Железа сульфат+Аскорбиновая кислота", "form": "таблетки п/пл/об.", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Занамивир", "form": "пор д/инг доз 5мг/доза ротодиск+ ингал 4доз", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Зопиклон", "form": "таблетки, покрытые пленочной оболочкой, таблетки, 7,5мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Ибупрофен", "form": "концентрат для приготовления раствора для инфузий 100 мг/мл, флакон, 8 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Индапамид+Телмисартан", "form": "таблетки, 1,5 мг 40 мгтаблетки, 1,5 мг 80 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Интерферон альфа", "form": "капли глазные, 10000 МЕ/мл+1 мг/мл, флакон 10мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Ипидакрин", "form": "раствор для внутримышечного и подкожного введения 15 мг/мл, ампула, 1 млтаблетки, 20 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Кальция хлорид", "form": "раствор для внутривенного введения 100 мг/мл, ампула, 10 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Канаглифлозин", "form": "таблетки, покрытые пленочной оболочкой, таблетки, 100 мгтаблетки, покрытые пленочной оболочкой, таблетки, 300 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Кислород", "form": "газ сжатый, баллон, 0.41 м3жидкий медицинский кислород 99,5%газ мед сжатый 1.03 м3 бал", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Комплекс микроэлементов (парентеральное введение)", "form": "конц. д/р-ра д/инф 10 мл амп", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Кофеин", "form": "раствор, 200 мг/мл 1 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Ламивудин+Тенофовир+Эфавиренз", "form": "таблетки, 300мг+ 300мг+ 600мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Левокарнитин", "form": "раствор для внутривенного и внутримышечного введения 100 мг/мл, ампула, 5 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Лидокаин+Хлоргексидин", "form": "гель для местного применения, шприц, 12,5 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Мебгидролин", "form": "драже, 100 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Мелоксикам", "form": "таблетки, 15 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Метамизол натрия", "form": "раствор, 500 мг/мл 5 млтаблетки, 500 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Метронидазол+Миконазол", "form": "таблетки, 100 мг 1 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Молочная кислота", "form": "суппозитории, 100 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Мометазон", "form": "спрей назальный дозированный, 50 мкг/доза, флакон (флакончик) полиэтиленовый с клапаном дозирующего действия 10 г (60 доз)", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Мяты перечной листьев масло+Фенобарбитал+Этилбромизовалерианат", "form": "капл д/внут фл-кап темн ст 25мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Натрия ацетат+Натрия хлорид", "form": "раствор для инфузий, флакон / бутылка, 400 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Натрия лаурилсульфоацетат+Натрия цитрат+Сорбитол", "form": "раствор, 5 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Непафенак", "form": "капли глазн. 0,1 % 5 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Нефопам", "form": "р-р для инфузий и в/м 10 мг/мл 2 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Никотиновая кислота", "form": "раствор для инъекций 10 мг/мл, ампула, 1 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Никотиноил гамма-аминомасляная кислота", "form": "таблетки 50 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Нитрофурантоин", "form": "таблетки, 50 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Олопатадин", "form": "глазные капли 0,2% 5мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Орнитин", "form": "конц. д/р-ра д/инф. 500 мг/мл 10 мл амп", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Папаверин", "form": "раствор для внутривенного и внутримышечного введения 20 мг/мл, ампула, 2 млсуппозитории ректальные, 20 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Папаверина гидрохлорид", "form": "суппозитории, 20 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Пиобактериофаг комплексный", "form": "раствор для приема внутрь, местного и наружного применения 20 мл, 100 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Пиперациллин+Тазобактам", "form": "лиофилизат для приготовления раствора для инфузий, флакон, 2 г+0.25 глиофилизат для приготовления раствора для инфузий, флакон, 3 г+0.375 глиофилизат для приготовления раствора для инфузий, флакон, 4 г+0,5 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Пиридоксин+Тиамин+Цианокобаламин+Лидокаин", "form": "раствор для внутримышечного введения, ампула, 2 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Прокаин+Сульфокамфорная кислота", "form": "раствор, 50,4 мг/мл 49,6 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Рабепразол", "form": "лиофилизат для приготовления раствора для внутривенного введения, флакон, 20 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Растворы для гемофильтрации", "form": "раствор для гемофильтрации 2 ммоль/л, пакет / мешки пластиковые, 5 л", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Серотонин", "form": "раствор для внутривенного и внутримышечного введения 10 мг/мл, ампула, 1 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Сулодексид", "form": "р-р для в/в и в/м 600 ЛЕ/2 мл 2 мл амп", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Сульбактам", "form": "порошок для приготовления раствора в/в и в/м введ. 1000 мгпорошок для приготовления раствора в/в и в/м введ. 500 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Таурин", "form": "капли глазные 4 %, флакон / флакон-капельница, 10 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Тиамфеникола глицинат ацетилцистеинат", "form": "лиофилизат для приготовления раствора для инъекций и ингаляций, флакон, 500 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Тиаприд", "form": "раствор для внутривенного и внутримышечного введения 50 мг/мл, ампула, 2 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Толперизон", "form": "таблетки, покрытые пленочной оболочкой, таблетки, 150 мгтаблетки, покрытые пленочной оболочкой, таблетки, 50 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Толперизон+Лидокаин", "form": "раствор, 100 мг/мл 2,5 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Торасемид", "form": "таблетки, 10 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Тразодон", "form": "таблетки с пролонг. высвобожд. 150 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Троксерутин", "form": "гель для наружного применения 2 %, туба, 40 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Тропикамид + Фенилэфрин", "form": "капли глазные, флакон, 5 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Финеренон", "form": "таблетки, 10 мгтаблетки, 20 мг", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Фондапаринукс натрия", "form": "раствор для внутривенного и подкожного введения 2,5 мг/0,5 мл, шприц, 0,5 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Фосфомицин", "form": "гранулы для приготовления раствора для приема внутрь, пакет, 3 гпор. д/р-ра д/приема внутрь 3 г пак 8 г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Цинка оксид", "form": "паста бан. 25г", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Ципрофлоксацин+Дексаметазон", "form": "капли глазные и ушные 5 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Цисатракурия безилат", "form": "раствор для внутривенного введения 2 мг/мл, ампула, 5 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Эналаприлат", "form": "раствор для внутривенного введения 1.25 мг/мл, ампула, 1 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Эптифибатид", "form": "раствор для внутривенного введения 0.75 мг/мл, флакон, 100 млраствор для внутривенного введения 2 мг/мл, ампула, 10 мл", "category": {"appendix": "1.2", "label": "Прил. 1.2 · только ВК"}, "need_vk": true, "need_clinpharm": false, "jnvlp": false, "appendix": "1.2"}, {"mnn": "Биапенем", "form": "порошок для приготовления раствора для инфузий 300мг\nпор. д/р-ра д/инф. 600 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Даптомицин", "form": "лиоф. Фл. 500 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Имипенем+[Циластатин]", "form": "пор. бут. 500 мг + 500 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Линезолид", "form": "раствор для инфузий 2 мг/мл, контейнер / пакет / флакон / бутылка, 200 мл\nраствор для инфузий 2 мг/мл, контейнер / пакет / флакон / бутылка, 300 мл", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Микафунгин", "form": "лиофилизат для приготовления раствора для инфузий, флакон, 100 мг\nлиофилизат для приготовления раствора для инфузий, флакон, 50 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Меропенем", "form": "порошок для приготовления раствора для внутривенного введения, флакон, 1000 мг\nпорошок для приготовления раствора для внутривенного введения, флакон, 250 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Полимиксин B", "form": "лиоф. фл. 50 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Тигециклин", "form": "лиоф. д/приг. раст. д/инф. 50 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Фосфомицин", "form": "порошок для приготовления раствора для внутривенного введения, флакон, 4 г", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Цефтазидим+авибактам", "form": "пор. фл. 2000+500 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Цефтолозан+тазобактам", "form": "пор. фл 1000+500 мг", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Цефтаролина фосамил", "form": "600 мг пор.", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Эртапенем", "form": "лиофилизат для приготовления раствора для инъекций, флакон, 1 г", "category": {"appendix": "1.3", "label": "Прил. 1.3 · ВК + клинфармаколог (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": true, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Ванкомицин", "form": "лиофилизат для приготовления раствора для инфузий и приема внутрь, флакон, 1 г\nпорошок, 1 г", "category": {"appendix": "1.3", "label": "Прил. 1.3 · только ВК (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": false, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Железа карбоксимальтозат", "form": "р-р фл. 5% (50 мг/мл) 2 мл, 10 мл", "category": {"appendix": "1.3", "label": "Прил. 1.3 · только ВК (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": false, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Цефепим+сульбактам", "form": "пор. фл. 1г+1г", "category": {"appendix": "1.3", "label": "Прил. 1.3 · только ВК (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": false, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Эзомепразол", "form": "40 мг лиоф. д/приг. р-ра", "category": {"appendix": "1.3", "label": "Прил. 1.3 · только ВК (ЖНВЛП)"}, "need_vk": true, "need_clinpharm": false, "jnvlp": true, "appendix": "1.3"}, {"mnn": "Аммиак", "form": "раствор для наружного применения и ингаляций 10 %, флакон, 100 мл\nраствор, 10 % 40 мл", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Бензилдиметил [3-(миристоиламино)пропил] аммоний хлорид моногидрат", "form": "раствор для местного применения 0.01 %, флакон, 150 мл", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Бензилдиметил-миристоиламино-пропиламмоний", "form": "р-р д/мест. и наруж. прим. 0.01 % 150 мл фл", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Бензокаин+Борная кислота+Облепихи крушиновидной плодов масло+Хлорамфеникол", "form": "аэрозоль для наружного применения, баллон, 80 г", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Борная кислота+Резорцин+Фенол+Фуксин", "form": "раствор для наружного применения, флакон, 25 мл", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Бриллиантовый зеленый", "form": "раствор для наружного применения спиртовой 1 %, флакон, 25 мл", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Вазелин", "form": "мазь, 30 г", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Декспантенол", "form": "аэрозоль для наружного применения 4.63 %, баллон, 130 г", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Декспантенол", "form": "гель глазной 5 % 5 г", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Декспантенол", "form": "мазь д/наруж. прим. 5 % 25 г", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Диоксометилтетрагидропиримидин", "form": "мазь д/наруж. и мест. прим. 10 % 25 г", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Йод+[Калия йодид+Этанол]", "form": "раствор для наружного применения спиртовой 5 %, флакон, 25 мл", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Клещевины обыкновенной семян масло", "form": "д/приема внутрь 30 мл фл", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}, {"mnn": "Парафин жидкий", "form": "масло для приема внутрь, флакон, 100 мл", "category": {"appendix": "1.4", "label": "Прил. 1.4 · без ВК (антисептики и др.)"}, "need_vk": false, "need_clinpharm": false, "jnvlp": false, "appendix": "1.4"}];
+
+  const input = document.getElementById('lpSearch');
+  const body = document.getElementById('vkBody');
+  const counter = document.getElementById('counter');
+  const emptyMsg = document.getElementById('emptyMsg');
+  const filtersEl = document.getElementById('filters');
+  let activeFilter = 'all';
+
+  function escapeHtml(s) {
+    return (s || '').replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+  function normalize(s) {
+    return (s || '').toString().toLowerCase().replace(/ё/g,'е').trim();
+  }
+  function highlight(text, q) {
+    const safe = escapeHtml(text);
+    if (!q) return safe;
+    // подсветка по нормализованному тексту, но строим по исходному
+    const nText = normalize(text);
+    const nQ = normalize(q);
+    if (!nQ) return safe;
+    const idx = nText.indexOf(nQ);
+    if (idx < 0) return safe;
+    // грубая подсветка: ищем подстроку q в оригинале без учета регистра
+    const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'ig');
+    return safe.replace(re, m => '<mark>' + m + '</mark>');
+  }
+
+  function statusBadges(item) {
+    const b = [];
+    if (item.need_vk && item.need_clinpharm) {
+      b.push('<span class="badge vk-clin">ВК + клинфармаколог</span>');
+    } else if (item.need_vk) {
+      b.push('<span class="badge vk">только ВК</span>');
+    } else {
+      b.push('<span class="badge no-vk">без ВК</span>');
+    }
+    if (item.jnvlp) b.push('<span class="badge jnvlp">ЖНВЛП</span>');
+    b.push('<span class="badge app">Прил. ' + escapeHtml(item.appendix) + '</span>');
+    return b.join(' ');
+  }
+
+  function matchesFilter(item) {
+    switch (activeFilter) {
+      case 'all':       return true;
+      case 'vk-clin':   return item.need_vk && item.need_clinpharm;
+      case 'vk-only':   return item.need_vk && !item.need_clinpharm;
+      case 'no-vk':     return !item.need_vk;
+      case 'jnvlp':     return item.jnvlp;
+      case 'not-jnvlp': return !item.jnvlp;
+      default:          return true;
+    }
+  }
+
+  function render() {
+    const q = input.value.trim();
+    const nq = normalize(q);
+    let shown = 0;
+    const parts = [];
+    for (const it of DATA) {
+      if (!matchesFilter(it)) continue;
+      const hay = normalize(it.mnn + ' ' + it.form);
+      if (nq && !hay.includes(nq)) continue;
+      shown++;
+      parts.push(
+        '<tr>' +
+          '<td><div class="mnn">' + highlight(it.mnn, q) + '</div></td>' +
+          '<td><div class="form">' + highlight(it.form, q) + '</div></td>' +
+          '<td><div class="badges">' + statusBadges(it) + '</div></td>' +
+        '</tr>'
+      );
+    }
+    body.innerHTML = parts.join('');
+    emptyMsg.style.display = shown ? 'none' : 'block';
+    counter.textContent = 'Показано: ' + shown + ' из ' + DATA.length;
+  }
+
+  input.addEventListener('input', render);
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.chip');
+    if (!btn) return;
+    activeFilter = btn.dataset.filter;
+    filtersEl.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>
