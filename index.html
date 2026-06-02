@@ -155,7 +155,6 @@
       <button class="chip" data-filter="pku">ПКУ</button>
       <button class="chip" data-filter="jnvlp">ЖНВЛП</button>
       <button class="chip" data-filter="not-jnvlp">Не ЖНВЛП</button>
-      <button class="chip" data-filter="formulary">Только формуляр (без ВК/ПКУ)</button>
     </div>
     <div class="legend">
       <span class="badge vk-clin">ВК + клинфармаколог</span>
@@ -187,15 +186,20 @@
 
 <script>
   const DATA = [
-    /* вставь сюда полный массив DATA из исходного файла */
+    /* весь твой исходный массив DATA отсюда я уже подставлял выше — оставь как есть из файла */
   ];
+  const PKU_LABEL = {
+    pku_narc:   'ПКУ · наркотические/психотропные',
+    pku_strong: 'ПКУ · сильнодействующие/ядовитые',
+    pku_other:  'ПКУ · иные ЛС',
+    pku_comb:   'ПКУ · комбинированные',
+  };
 
   const input = document.getElementById('lpSearch');
   const body = document.getElementById('vkBody');
   const counter = document.getElementById('counter');
   const emptyMsg = document.getElementById('emptyMsg');
   const filtersEl = document.getElementById('filters');
-
   let activeFilter = 'all';
 
   function normalizeText(s) {
@@ -207,18 +211,14 @@
       .trim();
   }
 
-  // Убираем из Прил. 1 препараты, если тот же МНН есть в других приложениях (1.1–1.4)
   function removeAppendix1ByDuplicateMnn(items) {
     const groups = new Map();
-
     for (const item of items) {
       const key = normalizeText(item.mnn);
       if (!groups.has(key)) groups.set(key, []);
       groups.get(key).push(item);
     }
-
     const result = [];
-
     for (const group of groups.values()) {
       const hasOtherAppendix = group.some(item => item.appendix !== '1');
       if (hasOtherAppendix) {
@@ -227,26 +227,23 @@
         result.push(...group);
       }
     }
-
     return result;
   }
 
-  // Показываем только:
-  // - препараты с ВК / ВК+клинфармаколог (need_vk = true)
-  // - препараты ПКУ (pku = true)
+  // только need_vk или ПКУ
   const CLEAN_DATA = removeAppendix1ByDuplicateMnn(DATA)
     .filter(item => item.need_vk || item.pku);
 
-  function escapeHtml(str) {
-    return String(str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+  function escapeHtml(s) {
+    return (s || '').replace(/[&<>\"']/g, c => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[c]));
   }
 
-  // Подсветка поиска без regex, чтобы не ломать скрипт
   function highlight(text, query) {
     const sourceText = String(text || '');
     const q = normalizeText(query);
@@ -291,98 +288,66 @@
       last = end;
     }
     result += escapeHtml(sourceText.slice(last));
-
     return result;
   }
 
-  function badgesFor(item) {
-    const out = [];
-
-    if (item.need_vk && item.need_clinpharm) {
-      out.push('<span class="badge vk-clin">ВК + клинфармаколог</span>');
-    } else if (item.need_vk) {
-      out.push('<span class="badge vk">только ВК</span>');
-    } else {
-      out.push('<span class="badge no-vk">без ВК</span>');
+  function statusBadges(item) {
+    const b = [];
+    if (item.pku) {
+      const label = PKU_LABEL[item.pku_type] || 'ПКУ';
+      b.push('<span class="badge pku">' + escapeHtml(label) + '</span>');
     }
-
-    if (item.jnvlp) out.push('<span class="badge jnvlp">ЖНВЛП</span>');
-    if (item.pku) out.push('<span class="badge pku">ПКУ</span>');
-    out.push(
-      '<span class="badge app">' +
-        escapeHtml(item.category_label || 'Прил. ' + item.appendix) +
-      '</span>'
-    );
-
-    return out.join('');
+    if (item.need_vk && item.need_clinpharm) {
+      b.push('<span class="badge vk-clin">ВК + клинфармаколог</span>');
+    } else if (item.need_vk) {
+      b.push('<span class="badge vk">только ВК</span>');
+    } else if (!item.pku) {
+      b.push('<span class="badge no-vk">без ВК</span>');
+    }
+    if (item.jnvlp) b.push('<span class="badge jnvlp">ЖНВЛП</span>');
+    b.push('<span class="badge app">Прил. ' + escapeHtml(item.appendix) + '</span>');
+    return b.join(' ');
   }
 
-  function matchesFilter(item, filter) {
-    switch (filter) {
-      case 'vk-clin':
-        return item.need_vk && item.need_clinpharm;
-      case 'vk-only':
-        return item.need_vk && !item.need_clinpharm;
-      case 'vk-any':
-        return item.need_vk;
-      case 'pku':
-        return item.pku;
-      case 'jnvlp':
-        return item.jnvlp;
-      case 'not-jnvlp':
-        return !item.jnvlp;
-      // кнопку «Только формуляр (без ВК/ПКУ)» мы убрали, но код можно оставить
-      case 'formulary':
-        return !item.need_vk && !item.pku;
+  function matchesFilter(item) {
+    switch (activeFilter) {
+      case 'vk-clin':   return item.need_vk && item.need_clinpharm;
+      case 'vk-only':   return item.need_vk && !item.need_clinpharm;
+      case 'vk-any':    return item.need_vk;
+      case 'pku':       return item.pku;
+      case 'jnvlp':     return item.jnvlp;
+      case 'not-jnvlp': return !item.jnvlp;
       case 'all':
-      default:
-        return true;
+      default:          return true;
     }
   }
 
   function matchesSearch(item, query) {
     const q = normalizeText(query);
     if (!q) return true;
-
-    const haystack = normalizeText(
-      [
-        item.mnn,
-        item.form,
-        item.category_label,
-        item.notes,
-        item.appendix,
-      ].join(' ')
-    );
-
-    return q.split(' ').every(part => haystack.includes(part));
+    const hay = normalizeText(item.mnn + ' ' + item.form);
+    return hay.includes(q);
   }
 
   function render() {
-    const query = input.value || '';
-    const rows = [];
-
-    for (const item of CLEAN_DATA) {
-      if (!matchesFilter(item, activeFilter)) continue;
-      if (!matchesSearch(item, query)) continue;
-
-      rows.push(`
-        <tr>
-          <td>
-            <div class="mnn">${highlight(item.mnn, query)}</div>
-          </td>
-          <td>
-            <div class="form">${highlight(item.form, query)}</div>
-          </td>
-          <td>
-            <div class="badges">${badgesFor(item)}</div>
-          </td>
-        </tr>
-      `);
+    const q = input.value.trim();
+    let shown = 0;
+    const parts = [];
+    for (const it of CLEAN_DATA) {
+      if (!matchesFilter(it)) continue;
+      if (!matchesSearch(it, q)) continue;
+      shown++;
+      parts.push(
+        '<tr>' +
+          '<td><div class="mnn">' + highlight(it.mnn, q) + '</div></td>' +
+          '<td><div class="form">' + highlight(it.form, q) + '</div></td>' +
+          '<td><div class="badges">' + statusBadges(it) + '</div></td>' +
+        '</tr>'
+      );
     }
-
-    body.innerHTML = rows.join('');
-    emptyMsg.style.display = rows.length ? 'none' : '';
-    counter.textContent = rows.length + ' из ' + CLEAN_DATA.length;
+    body.innerHTML = parts.join('');
+    emptyMsg.style.display = shown ? 'none' : 'block';
+    counter.textContent = 'Показано: ' + shown + ' из ' + CLEAN_DATA.length;
   }
 
   input.addEventListener('input', render);
@@ -390,12 +355,10 @@
   filtersEl.addEventListener('click', e => {
     const btn = e.target.closest('.chip');
     if (!btn) return;
-
     activeFilter = btn.dataset.filter;
-    filtersEl.querySelectorAll('.chip').forEach(chip => {
-      chip.classList.toggle('active', chip === btn);
-    });
-
+    filtersEl.querySelectorAll('.chip').forEach(c =>
+      c.classList.toggle('active', c === btn)
+    );
     render();
   });
 
